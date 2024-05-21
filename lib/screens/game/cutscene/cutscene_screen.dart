@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gate_of_olympus_app/router/router.dart';
+import 'package:gate_of_olympus_app/services/shared_preferences.dart';
 
 @RoutePage()
 class CutsceneScreen extends StatefulWidget {
@@ -67,7 +68,9 @@ class _CutsceneScreenState extends State<CutsceneScreen> {
                         Align(
                           alignment: Alignment.centerRight,
                           child: GestureDetector(
-                            onTap: () {
+                            onTap: () async {
+                              SharedPreferencesService storage = await SharedPreferencesService.getInstance();
+                              storage.hearts -= 1;
                               context.router.push(GameRoute());
                             },
                             child: Container(

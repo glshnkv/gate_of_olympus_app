@@ -8,6 +8,7 @@ import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gate_of_olympus_app/router/router.dart';
+import 'package:gate_of_olympus_app/services/shared_preferences.dart';
 import 'package:gate_of_olympus_app/widgets/scores/scores.dart';
 import 'package:gate_of_olympus_app/widgets/scores/scores_bloc/scores_bloc.dart';
 
@@ -170,7 +171,9 @@ class _MagicWheelScreenState extends State<MagicWheelScreen> {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () {
+                        onTap: () async {
+                          SharedPreferencesService storage = await SharedPreferencesService.getInstance();
+                          storage.coins -= 20;
                           resultIndex = Fortune.randomInt(0, items.length);
                           controller.add(resultIndex);
                         },
